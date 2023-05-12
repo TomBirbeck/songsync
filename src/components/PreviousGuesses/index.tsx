@@ -1,24 +1,30 @@
 interface GuessIProps {
-    guesses: {guess: string}[]
+    guesses: {
+        guess1: string;
+        guess2: string;
+        guess3: string;
+        guess4: string;
+        guess5: string;
+    }
 }
 
 const PreviousGuesses = ({guesses}: GuessIProps) => {
     return (
         <div className="bg-white w-10/12">
         <div className="flex justify-around">
-            <p>{guesses[0].guess}</p><span>X</span>
+            <p>{guesses.guess1}</p><span>X</span>
         </div>
         <div className="flex justify-around">
-            <p>{guesses[1].guess}</p><span>X</span>
+            <p>{guesses.guess2}</p><span>X</span>
         </div>
         <div className="flex justify-around">
-            <p>{guesses[2].guess}</p><span>X</span>
+            <p>{guesses.guess3}</p><span>X</span>
         </div>
         <div className="flex justify-around">
-            <p>{guesses[3].guess}</p><span>X</span>
+            <p>{guesses.guess4}</p><span>X</span>
         </div>
         <div className="flex justify-around">
-            <p>{guesses[4].guess}</p><span>X</span>
+            <p>{guesses.guess5}</p><span>X</span>
         </div>
         </div>
     )
