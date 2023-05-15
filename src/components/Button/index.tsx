@@ -1,6 +1,4 @@
-interface ButtonProps {
-    name: string;
-}
+import { ButtonProps } from "../types"
 
 const Button = ({name}: ButtonProps) => {
 return (

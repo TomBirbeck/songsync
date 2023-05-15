@@ -1,12 +1,4 @@
-interface GuessIProps {
-    guesses: {
-        guess1: string;
-        guess2: string;
-        guess3: string;
-        guess4: string;
-        guess5: string;
-    }
-}
+import { GuessIProps } from "../types"
 
 const PreviousGuesses = ({guesses}: GuessIProps) => {
     return (

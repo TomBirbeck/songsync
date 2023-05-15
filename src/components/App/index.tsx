@@ -1,7 +1,7 @@
 import {useState} from 'react'
-import Button from "../Button"
 import GuessForm from "../GuessForm"
 import PreviousGuesses from "../PreviousGuesses"
+import Header from '../Header'
 
 function App() {
   const [guessList, setGuessList] = useState(
@@ -13,11 +13,10 @@ function App() {
   )
 
   return (
-    <div className="h-screen w-screen bg-black flex flex-col items-center p-2">
-     <h1 className="text-rose-300">Song Sync</h1>
+    <div className="h-screen w-screen bg-black flex flex-col items-center p-2 gap-4">
+     <Header/>
      <PreviousGuesses guesses={guessList}/>
      <GuessForm guessList={guessList} setGuessList={setGuessList}/>
-     <Button name='Skip'/>
     </div>
   )
 }

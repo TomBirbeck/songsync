@@ -1,21 +1,6 @@
 import { useState, ChangeEvent} from "react"
-
-interface FormIProps {
-    guessList: {
-        guess1: string;
-        guess2: string;
-        guess3: string;
-        guess4: string;
-        guess5: string;
-    }
-    setGuessList: React.Dispatch<React.SetStateAction<{
-        guess1: string;
-        guess2: string;
-        guess3: string;
-        guess4: string;
-        guess5: string;
-    }>>;
-}
+import Button from "../Button";
+import { FormIProps } from "../types";
 
 const GuessForm = ({guessList, setGuessList}: FormIProps) => {
     const [guessIndex, setGuessIndex] = useState(0);
@@ -44,9 +29,13 @@ const GuessForm = ({guessList, setGuessList}: FormIProps) => {
     }
 
     return (
-        <form className="w-full flex justify-center" onSubmit={handleSubmit}>
-            <input placeholder="Enter a guess" onChange={handleGuess}></input>
-            <button className="border-solid border-2 border-green-300 bg-green-400 w-2/5 rounded-md" type="submit">Check</button>
+        <form className="w-full flex flex-col justify-center items-center gap-2" onSubmit={handleSubmit}>
+            <input
+            className="px-1 rounded-md w-10/12"
+            placeholder="Enter a guess"
+            onChange={handleGuess}></input>
+            <button className="border-solid border-2 border-green-300 bg-green-400 w-2/5 rounded-md">Check</button>
+            <Button name={'Skip'}/>
         </form>
     )
 }
