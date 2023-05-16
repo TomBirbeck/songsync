@@ -5,6 +5,7 @@ import Header from '../Header'
 import LyricsDisplay from '../LyricsDisplay'
 
 function App() {
+  const [answer, setAnswer] = useState<string>('')
   const [guessList, setGuessList] = useState(
     {guess1: 'Guess 1',
     guess2: 'Guess 2',
@@ -18,7 +19,7 @@ function App() {
      <Header/>
      <LyricsDisplay/>
      <PreviousGuesses guesses={guessList}/>
-     <GuessForm guessList={guessList} setGuessList={setGuessList}/>
+     <GuessForm guessList={guessList} setGuessList={setGuessList} answer={answer}/>
     </div>
   )
 }
