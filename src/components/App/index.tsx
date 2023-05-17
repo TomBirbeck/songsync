@@ -4,6 +4,7 @@ import PreviousGuesses from "../PreviousGuesses"
 import Header from '../Header'
 import LyricsDisplay from '../LyricsDisplay'
 import getSong from '../utils/getSong'
+import randomNum from '../utils/getRandomNum'
 
 function App() {
   const [answer, setAnswer] = useState<string>('')
@@ -18,6 +19,7 @@ function App() {
   useEffect(() => {
     const songData = getSong();
     // setAnswer() songname
+    console.log(randomNum())
     
   },[])
 
