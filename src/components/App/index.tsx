@@ -1,8 +1,9 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import GuessForm from "../GuessForm"
 import PreviousGuesses from "../PreviousGuesses"
 import Header from '../Header'
 import LyricsDisplay from '../LyricsDisplay'
+import getSong from '../utils/getSong'
 
 function App() {
   const [answer, setAnswer] = useState<string>('')
@@ -13,6 +14,12 @@ function App() {
     guess4: 'Guess 4',
     guess5: 'Guess 5'},
   )
+
+  useEffect(() => {
+    const songData = getSong();
+    // setAnswer() songname
+    
+  },[])
 
   return (
     <div className="h-screen w-screen bg-black flex flex-col items-center p-2 gap-4">
