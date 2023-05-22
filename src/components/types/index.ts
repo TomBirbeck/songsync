@@ -24,6 +24,13 @@ export type FormIProps = {
         guess5: string;
     }>>;
     answer: string;
+    guessIndex: number;
+    setGuessIndex: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export type lyricsProps = {
+    lyrics: string;
+    guessIndex: number;
 }
 
 export type ButtonProps = {

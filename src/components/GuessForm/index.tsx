@@ -2,15 +2,14 @@ import { useState, ChangeEvent} from "react"
 import Button from "../Button";
 import { FormIProps } from "../types";
 
-const GuessForm = ({guessList, setGuessList, answer}: FormIProps) => {
-    const [guessIndex, setGuessIndex] = useState(0);
+const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex}: FormIProps) => {
     const [guess, setGuess] = useState('')
     
     const handleGuess = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setGuess(e.target.value)
     }
-
+    
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (guessIndex === 0){
@@ -24,7 +23,7 @@ const GuessForm = ({guessList, setGuessList, answer}: FormIProps) => {
         } else if (guessIndex === 4){
             setGuessList({...guessList, guess5 : guess});
         }
-        setGuessIndex((prev) => prev+=1)
+        setGuessIndex(guessIndex+=1)
         setGuess('')
     }
 
@@ -35,6 +34,8 @@ const GuessForm = ({guessList, setGuessList, answer}: FormIProps) => {
             console.log('incorrect');
         }
     }
+
+    console.log(guessIndex)
 
     return (
         <>

@@ -1,8 +1,22 @@
-const LyricsDisplay = () => {
+import {useEffect, useState} from 'react';
+import { lyricsProps } from '../types';
+
+const LyricsDisplay = ({lyrics, guessIndex}: lyricsProps) => {
+    const [display, setDisplay] = useState('')
+    const splitLyrics = lyrics.split(' ')
+    const lyricLength = (index: number) => {
+        if (index === 0){
+            return splitLyrics.slice(0, 5)
+        }
+        else return splitLyrics.slice(0, 10)
+    }
+    useEffect(() => {
+        setDisplay(lyricLength(guessIndex).join(' '));
+    }, [guessIndex])
     return (
         <div className="h-2/5 w-10/12">
             <p className="text-white">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae ut rerum mollitia. Veniam blanditiis rem expedita. Neque maxime ad, minima in iure, debitis adipisci perspiciatis reiciendis eligendi facere provident quaerat.
+              {display}
             </p>
         </div>
     )
