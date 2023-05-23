@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import GuessForm from "../GuessForm"
 import PreviousGuesses from "../PreviousGuesses"
 import Header from '../Header'
@@ -58,12 +58,15 @@ function App() {
     guess5: 'Guess 5'},
   );
   const [guessIndex, setGuessIndex] = useState(0);
+  useEffect(() => {
+    setAnswer(song.song)
+  },[])
 
   return (
     <div className="h-screen w-screen bg-black flex flex-col items-center p-2 gap-4">
      <Header/>
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
-     <PreviousGuesses guesses={guessList}/>
+     <PreviousGuesses guesses={guessList} answer={answer}/>
      <GuessForm guessList={guessList} setGuessList={setGuessList} answer={answer} guessIndex={guessIndex} setGuessIndex={setGuessIndex}/>
     </div>
   )

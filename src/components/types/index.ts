@@ -5,7 +5,8 @@ export type GuessIProps = {
         guess3: string;
         guess4: string;
         guess5: string;
-    }
+    };
+    answer: string;
 }
 
 export type FormIProps = {

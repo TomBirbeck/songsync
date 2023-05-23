@@ -11,21 +11,44 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex}:
     }
     
     const handleSubmit = (e: any) => {
+        console.log(e)
         e.preventDefault();
-        if (guessIndex === 0){
-            setGuessList({...guessList, guess1 : guess});
-        } else if (guessIndex === 1){
-            setGuessList({...guessList, guess2 : guess});
-        } else if (guessIndex === 2){
-            setGuessList({...guessList, guess3 : guess});
-        } else if (guessIndex === 3){
-            setGuessList({...guessList, guess4 : guess});
-        } else if (guessIndex === 4){
-            setGuessList({...guessList, guess5 : guess});
+        if (guessIndex < 5){
+            if (guessIndex === 0){
+                if(guess === ''){
+                    setGuessList({...guessList, guess1: 'Passed'});
+                } else {
+                    setGuessList({...guessList, guess1 : guess});
+                }
+            } else if (guessIndex === 1){
+                if(guess === ''){
+                    setGuessList({...guessList, guess2: 'Passed'});
+                } else {
+                    setGuessList({...guessList, guess2 : guess});
+                }
+            } else if (guessIndex === 2){
+                if(guess === ''){
+                    setGuessList({...guessList, guess3: 'Passed'});
+                } else {
+                    setGuessList({...guessList, guess3 : guess});
+                }
+            } else if (guessIndex === 3){
+                if(guess === ''){
+                    setGuessList({...guessList, guess4: 'Passed'});
+                } else {
+                    setGuessList({...guessList, guess4 : guess});
+                }
+            } else if (guessIndex === 4){
+                if(guess === ''){
+                    setGuessList({...guessList, guess5: 'Passed'});
+                } else {
+                    setGuessList({...guessList, guess5 : guess});
+                }
+            }
+            setGuessIndex(guessIndex+=1)
+            setGuess('')
+            handleCheck(guess, answer || '')
         }
-        setGuessIndex(guessIndex+=1)
-        setGuess('')
-        handleCheck(guess, answer || '')
     }
 
     const handleCheck = (guess: string, answer: string) => {
@@ -42,7 +65,9 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex}:
             <input
             className="px-1 rounded-md w-10/12"
             placeholder="Enter a guess"
-            onChange={handleGuess}></input>
+            value={guess}
+            onChange={handleGuess}>   
+            </input>
             <button className="border-solid border-2 border-green-300 bg-green-400 w-2/5 rounded-md">Check</button>
             <Button name={'Skip'}/>
         </form>
