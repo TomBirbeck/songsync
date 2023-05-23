@@ -25,6 +25,7 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex}:
         }
         setGuessIndex(guessIndex+=1)
         setGuess('')
+        handleCheck(guess, answer || '')
     }
 
     const handleCheck = (guess: string, answer: string) => {
@@ -35,8 +36,6 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex}:
         }
     }
 
-    console.log(guessIndex)
-
     return (
         <>
         <form className="w-full flex flex-col justify-center items-center gap-2" onSubmit={handleSubmit}>
@@ -44,9 +43,9 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex}:
             className="px-1 rounded-md w-10/12"
             placeholder="Enter a guess"
             onChange={handleGuess}></input>
-        </form>
-            <button className="border-solid border-2 border-green-300 bg-green-400 w-2/5 rounded-md" onClick={() => {handleCheck(guess, answer || '')}}>Check</button>
+            <button className="border-solid border-2 border-green-300 bg-green-400 w-2/5 rounded-md">Check</button>
             <Button name={'Skip'}/>
+        </form>
         </>
     )
 }

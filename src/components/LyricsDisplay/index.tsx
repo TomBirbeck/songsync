@@ -3,12 +3,9 @@ import { lyricsProps } from '../types';
 
 const LyricsDisplay = ({lyrics, guessIndex}: lyricsProps) => {
     const [display, setDisplay] = useState('')
-    const splitLyrics = lyrics.split(' ')
+    const splitLyrics = lyrics.split(' ').filter((word) => word.length > 0)
     const lyricLength = (index: number) => {
-        if (index === 0){
-            return splitLyrics.slice(0, 5)
-        }
-        else return splitLyrics.slice(0, 10)
+        return splitLyrics.slice(0, (index + 1) * 5)
     }
     useEffect(() => {
         setDisplay(lyricLength(guessIndex).join(' '));
