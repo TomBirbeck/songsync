@@ -5,6 +5,7 @@ import Header from '../Header'
 import LyricsDisplay from '../LyricsDisplay'
 
 function App() {
+  const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
   const [answer, setAnswer] = useState<string>('')
   const [song, setSong] = useState(
     {
@@ -67,7 +68,15 @@ function App() {
      <Header/>
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
      <PreviousGuesses guesses={guessList} answer={answer}/>
-     <GuessForm guessList={guessList} setGuessList={setGuessList} answer={answer} guessIndex={guessIndex} setGuessIndex={setGuessIndex}/>
+     <GuessForm
+        guessList={guessList}
+        setGuessList={setGuessList}
+        answer={answer}
+        guessIndex={guessIndex}
+        setGuessIndex={setGuessIndex}
+        correctAnswerGiven={correctAnswerGiven}
+        setCorrectAnswerGiven={setCorrectAnswerGiven}
+        />
     </div>
   )
 }
