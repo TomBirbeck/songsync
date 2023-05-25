@@ -3,6 +3,7 @@ import GuessForm from "../GuessForm"
 import PreviousGuesses from "../PreviousGuesses"
 import Header from '../Header'
 import LyricsDisplay from '../LyricsDisplay'
+import Result from '../Result'
 
 function App() {
   const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
@@ -68,15 +69,20 @@ function App() {
      <Header/>
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
      <PreviousGuesses guesses={guessList} answer={answer}/>
+     {!correctAnswerGiven && guessIndex < 5 ?
      <GuessForm
-        guessList={guessList}
-        setGuessList={setGuessList}
-        answer={answer}
-        guessIndex={guessIndex}
-        setGuessIndex={setGuessIndex}
-        correctAnswerGiven={correctAnswerGiven}
-        setCorrectAnswerGiven={setCorrectAnswerGiven}
-        />
+     guessList={guessList}
+     setGuessList={setGuessList}
+     answer={answer}
+     guessIndex={guessIndex}
+     setGuessIndex={setGuessIndex}
+     setCorrectAnswerGiven={setCorrectAnswerGiven}
+     /> : null
+    }
+        {
+          correctAnswerGiven || !correctAnswerGiven && guessIndex === 5 ? 
+          <Result correctAnswerGiven={correctAnswerGiven} song={song.song} artist={song.artist}/> : null
+        }
     </div>
   )
 }

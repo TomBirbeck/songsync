@@ -27,8 +27,13 @@ export type FormIProps = {
     answer: string;
     guessIndex: number;
     setGuessIndex: React.Dispatch<React.SetStateAction<number>>;
-    correctAnswerGiven: boolean;
     setCorrectAnswerGiven: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type ResultIProps = {
+    correctAnswerGiven: boolean;
+    song: string;
+    artist: string;
 }
 
 export type lyricsProps = {
