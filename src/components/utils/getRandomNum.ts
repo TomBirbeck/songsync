@@ -1,5 +1,5 @@
 const randomNum = () :number =>  {
-return Math.round(Math.random() * (100000 - 1) + 1)
+return Math.floor(Math.random() * 6)
 }
 
 export default randomNum
