@@ -2,19 +2,21 @@ import {useEffect, useState} from 'react';
 import { lyricsProps } from '../types';
 
 const LyricsDisplay = ({lyrics, guessIndex}: lyricsProps) => {
-    const [display, setDisplay] = useState('')
-    const splitLyrics = lyrics.split(' ').filter((word) => word.length > 0)
+    const [display, setDisplay] = useState<string[]>(['']);
+    const splitLyrics = lyrics.split(',');
     const lyricLength = (index: number) => {
-        return splitLyrics.slice(0, (index + 1) * 5)
+        return splitLyrics.slice(0, index + 1)
     }
     useEffect(() => {
-        setDisplay(lyricLength(guessIndex).join(' '));
+        setDisplay(lyricLength(guessIndex));
     }, [guessIndex])
     return (
-        <div className="h-2/5 w-10/12">
-            <p className="text-white">
-              {display}
-            </p>
+        <div className="h-2/5 w-10/12 md:w-1/2">
+            {display.map((lyric, index) => { 
+                return (
+                <p className="text-white" key={index}>{lyric}</p>
+                )
+            })}
         </div>
     )
 }

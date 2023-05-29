@@ -2,7 +2,7 @@ import { GuessIProps } from "../types"
 
 const PreviousGuesses = ({guesses, answer}: GuessIProps) => {
     return (
-        <div className="bg-white w-10/12">
+        <div className="bg-white w-10/12 md:w-1/2">
         <div className="flex justify-around">
             <p>{guesses.guess1}</p>{guesses.guess1 ==='Guess 1' ? <span></span> : guesses.guess1 === answer? <span>Y</span> : <span>X</span>}
         </div>
