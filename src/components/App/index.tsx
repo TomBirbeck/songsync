@@ -1,11 +1,10 @@
-import {useState, useEffect} from 'react'
-import GuessForm from "../GuessForm"
-import PreviousGuesses from "../PreviousGuesses"
-import Header from '../Header'
-import LyricsDisplay from '../LyricsDisplay'
-import Result from '../Result'
-import randomNum from '../utils/getRandomNum'
-import songList from '../utils/data'
+import {useState, useEffect} from 'react';
+import GuessForm from "../GuessForm";
+import PreviousGuesses from "../PreviousGuesses";
+import Header from '../Header';
+import LyricsDisplay from '../LyricsDisplay';
+import Result from '../Result';
+import randomNum from '../utils/getRandomNum';
 
 function App() {
   const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
@@ -20,13 +19,18 @@ function App() {
   );
   const [guessIndex, setGuessIndex] = useState(0);
 
+  const getSong = async (id: number) => {
+    const res = await fetch(`http://localhost:3001/songs/${id}`);
+    const data = await res.json();
+    const songInfo = data.payload;
+    setAnswer(songInfo[0].name);
+    setSong({song: songInfo[0].name, artist: songInfo[0].artist, lyrics: songInfo[0].lyrics});
+}
+
   useEffect(() => {
     const songNum = randomNum();
-    const selectedSong = songList[songNum];
-    setSong(selectedSong);
-    setAnswer(selectedSong.song);
-  },[])
-
+    getSong(songNum);
+  },[]);
 
   return (
     <div className="min-h-screen h-full w-full bg-black flex flex-col items-center p-2 gap-4">
