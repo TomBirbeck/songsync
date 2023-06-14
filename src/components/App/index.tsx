@@ -17,6 +17,39 @@ function App() {
     guess5: 'Guess 5'},
   );
   const [guessIndex, setGuessIndex] = useState(0);
+  const [progress, setProgress] = useState('passed')
+
+  const updateProgress = (progress: any) => {
+    const d = new Date;
+    const today = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+    localStorage.setItem("status", progress);
+    localStorage.setItem("game-date", today);
+    const status = localStorage.getItem("status");
+    const gameDate = localStorage.getItem("game-date");
+    console.log(status, gameDate);
+  }
+
+  const checkDate = () => {
+    const d = new Date;
+    const today = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+    const dateInStorage = localStorage.getItem("game-date");
+    const statusInStorage = localStorage.getItem("status");
+    if (today === dateInStorage){
+      if (statusInStorage !== "failed"){
+        console.log("game on")
+      }
+      if (statusInStorage === "passed"){
+        console.log("winner")
+      } else {
+        console.log("failed")
+      }
+    } else {
+      setProgress("ongoing");
+      localStorage.setItem("status", "ongoing");
+      localStorage.setItem("game-date", today);
+      console.log("different date")
+    }
+  }
 
   const getSong = async () => {
     const res = await fetch(`http://localhost:3001/todayssong`);
@@ -28,6 +61,8 @@ function App() {
 
 useEffect(() => {
     getSong();
+    checkDate();
+    // updateProgress(progress);
   },[]);
 
 return (
