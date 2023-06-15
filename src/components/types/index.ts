@@ -28,6 +28,7 @@ export type FormIProps = {
     guessIndex: number;
     setGuessIndex: React.Dispatch<React.SetStateAction<number>>;
     setCorrectAnswerGiven: React.Dispatch<React.SetStateAction<boolean>>;
+    setProgress: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export type ResultIProps = {

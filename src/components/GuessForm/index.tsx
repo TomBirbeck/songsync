@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent} from "react"
 import Button from "../Button";
 import { FormIProps } from "../types";
 
-const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, setCorrectAnswerGiven}: FormIProps) => {
+const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, setCorrectAnswerGiven, setProgress}: FormIProps) => {
     const [guess, setGuess] = useState('');
     
     const handleGuess = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,8 +53,16 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
     const handleCheck = (guess: string, answer: string) => {
         if (guess.toLowerCase() === answer.toLowerCase()){
             setCorrectAnswerGiven(true);
+            localStorage.setItem('status', 'passed');
+            setProgress('passed');
         } else {
-            setCorrectAnswerGiven(false);
+            if (guessIndex === 4){
+                localStorage.setItem('status', 'failed');
+                setProgress('failed');
+                setCorrectAnswerGiven(false);
+            } else {
+                setCorrectAnswerGiven(false);
+            }
         }
     }
 

@@ -17,7 +17,10 @@ function App() {
     guess5: 'Guess 5'},
   );
   const [guessIndex, setGuessIndex] = useState<number>(Number(localStorage.getItem('guess-index')) || 0);
-  const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing')
+  const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
+
+  // localStorage.setItem('status', 'playing');
+  // localStorage.setItem('guess-index', '0')
 
   const updateProgress = (progress: any) => {
     const today = new Date;
@@ -31,7 +34,6 @@ function App() {
     const status = localStorage.getItem("status");
     const guessIndex = localStorage.getItem("guess-index");
     if (status && guessIndex){
-      console.log("exists", status, guessIndex);
       setGuessIndex(Number(guessIndex));
       setProgress(status);
     }
@@ -47,9 +49,10 @@ function App() {
       if (statusInStorage === "playing"){
         setGuessIndex(GuessIndexInStorage);
       }
-      if (statusInStorage === "passed"){
+      else if (statusInStorage === "passed"){
         setCorrectAnswerGiven(true);
-      } else if (statusInStorage === 'failed'){
+      }
+      else if (statusInStorage === 'failed'){
         setGuessIndex(5)
       }
     } else {
@@ -93,6 +96,7 @@ return (
      guessIndex={guessIndex}
      setGuessIndex={setGuessIndex}
      setCorrectAnswerGiven={setCorrectAnswerGiven}
+     setProgress={setProgress}
      /> : null
     }
         {
