@@ -16,38 +16,47 @@ function App() {
     guess4: 'Guess 4',
     guess5: 'Guess 5'},
   );
-  const [guessIndex, setGuessIndex] = useState(0);
-  const [progress, setProgress] = useState('passed')
+  const [guessIndex, setGuessIndex] = useState<number>(Number(localStorage.getItem('guess-index')) || 0);
+  const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing')
 
   const updateProgress = (progress: any) => {
-    const d = new Date;
-    const today = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+    const today = new Date;
+    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`
     localStorage.setItem("status", progress);
-    localStorage.setItem("game-date", today);
+    localStorage.setItem("game-date", todayDateString);
+    localStorage.setItem("guess-index", `${guessIndex}`);
+  }
+
+  const checkForProgress = () => {
     const status = localStorage.getItem("status");
-    const gameDate = localStorage.getItem("game-date");
-    console.log(status, gameDate);
+    const guessIndex = localStorage.getItem("guess-index");
+    if (status && guessIndex){
+      console.log("exists", status, guessIndex);
+      setGuessIndex(Number(guessIndex));
+      setProgress(status);
+    }
   }
 
   const checkDate = () => {
-    const d = new Date;
-    const today = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+    const today = new Date;
+    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`
     const dateInStorage = localStorage.getItem("game-date");
     const statusInStorage = localStorage.getItem("status");
-    if (today === dateInStorage){
-      if (statusInStorage !== "failed"){
-        console.log("game on")
+    const GuessIndexInStorage = Number(localStorage.getItem("guess-index"));
+    if (todayDateString === dateInStorage){
+      if (statusInStorage === "playing"){
+        setGuessIndex(GuessIndexInStorage);
       }
       if (statusInStorage === "passed"){
-        console.log("winner")
-      } else {
-        console.log("failed")
+        setCorrectAnswerGiven(true);
+      } else if (statusInStorage === 'failed'){
+        setGuessIndex(5)
       }
     } else {
-      setProgress("ongoing");
-      localStorage.setItem("status", "ongoing");
-      localStorage.setItem("game-date", today);
-      console.log("different date")
+      setProgress("playing");
+      localStorage.setItem("status", "playing");
+      localStorage.setItem("game-date", todayDateString);
+      localStorage.setItem("guess-index", '0');
     }
   }
 
@@ -62,8 +71,12 @@ function App() {
 useEffect(() => {
     getSong();
     checkDate();
-    // updateProgress(progress);
+    checkForProgress();
   },[]);
+  
+useEffect(() => {
+  updateProgress(progress);
+},[guessIndex, progress]);
 
 return (
     <div className="min-h-screen h-full w-full bg-black flex flex-col items-center p-2 gap-4">
