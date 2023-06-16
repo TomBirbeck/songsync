@@ -45,3 +45,9 @@ export type lyricsProps = {
 export type ButtonProps = {
     name: string;
 }
+
+export type PreviousGuessItemIprops = {
+    guess: string;
+    answer: string;
+    guessNumber: number;
+    }
