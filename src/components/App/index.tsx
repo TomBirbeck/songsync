@@ -19,8 +19,8 @@ function App() {
   const [guessIndex, setGuessIndex] = useState<number>(Number(localStorage.getItem('guess-index')) || 0);
   const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
 
-  // localStorage.setItem('status', 'playing');
-  // localStorage.setItem('guess-index', '0')
+  localStorage.setItem('status', 'playing');
+  localStorage.setItem('guess-index', '0')
 
   const updateProgress = (progress: any) => {
     const today = new Date;
