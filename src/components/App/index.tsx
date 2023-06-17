@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import GuessForm from "../GuessForm";
 import PreviousGuesses from "../PreviousGuesses";
-import Header from '../Header';
 import LyricsDisplay from '../LyricsDisplay';
 import Result from '../Result';
 import ScoreHistory from '../ScoreHistory.tsx';
+import NavBar from '../Navbar/index.tsx';
 
 function App() {
   const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
@@ -19,6 +19,8 @@ function App() {
   );
   const [guessIndex, setGuessIndex] = useState<number>(Number(localStorage.getItem('guess-index')) || 0);
   const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
+  const [gameInfoToggle, setGameInfoToggle] = useState(false);
+  const [scoreHistoryToggle, setScoreHistoryToggle] = useState(false);
 
   // localStorage.setItem('status', 'playing');
   // localStorage.setItem('guess-index', '0');
@@ -98,9 +100,16 @@ useEffect(() => {
   updateProgress(progress);
 },[guessIndex, progress]);
 
+console.log(scoreHistoryToggle, gameInfoToggle)
+
 return (
     <div className="min-h-screen h-full w-full bg-gray-950 flex flex-col items-center p-2 gap-4">
-     <Header/>
+      <NavBar
+      scoreHistoryToggle={scoreHistoryToggle}
+      setScoreHistoryToggle={setScoreHistoryToggle}
+      gameInfoToggle={gameInfoToggle}
+      setGameInfoToggle={setGameInfoToggle}
+      />
      {song.lyrics.length > 1 &&
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
      }
@@ -120,7 +129,7 @@ return (
           correctAnswerGiven || !correctAnswerGiven && guessIndex === 5 ? 
           <Result correctAnswerGiven={correctAnswerGiven} song={song.song} artist={song.artist}/> : null
         }
-      <ScoreHistory/>
+    {scoreHistoryToggle && <ScoreHistory/>}
     </div>
   )
 }
