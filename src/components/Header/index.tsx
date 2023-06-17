@@ -1,9 +1,9 @@
 const Header = () => {
     return(
-        <div>
-            <h1 className="text-3xl md:text-6xl text-white">Song Sync</h1>
-            <div className="w-full h-4 bg-green-900"></div>
-        </div>
+        <div className="md:my-4">
+            <h1 className="w-full text-center text-3xl md:text-7xl text-white">Lyrical</h1>
+        <div className="w-full h-4 bg-purple-400"></div>
+    </div>
     )
 }
 

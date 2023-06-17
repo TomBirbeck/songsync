@@ -97,7 +97,7 @@ useEffect(() => {
 },[guessIndex, progress]);
 
 return (
-    <div className="min-h-screen h-full w-full bg-black flex flex-col items-center p-2 gap-4">
+    <div className="min-h-screen h-full w-full bg-gray-950 flex flex-col items-center p-2 gap-4">
      <Header/>
      {song.lyrics.length > 1 &&
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
