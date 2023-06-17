@@ -9,7 +9,7 @@ function App() {
   const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
   const [answer, setAnswer] = useState<string>('')
   const [song, setSong] = useState({song: '', artist: '', lyrics: ''});
-  const [guessList, setGuessList] = useState(
+  const [guessList, setGuessList] = useState( JSON.parse(localStorage.getItem("songSyncGuesses")!) ||
     {guess1: 'Guess 1',
     guess2: 'Guess 2',
     guess3: 'Guess 3',
@@ -19,12 +19,17 @@ function App() {
   const [guessIndex, setGuessIndex] = useState<number>(Number(localStorage.getItem('guess-index')) || 0);
   const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
 
-  localStorage.setItem('status', 'playing');
-  localStorage.setItem('guess-index', '0')
+  // localStorage.setItem('status', 'playing');
+  // localStorage.setItem('guess-index', '0');
+  // const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5" };
+  // localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
+
 
   const updateProgress = (progress: any) => {
     const today = new Date;
-    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`
+    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+    const songSync = {guess1: guessList.guess1, guess2: guessList.guess2, guess3: guessList.guess3, guess4: guessList.guess4, guess5: guessList.guess5 };
+    localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
     localStorage.setItem("status", progress);
     localStorage.setItem("game-date", todayDateString);
     localStorage.setItem("guess-index", `${guessIndex}`);
@@ -36,6 +41,10 @@ function App() {
     if (status && guessIndex){
       setGuessIndex(Number(guessIndex));
       setProgress(status);
+      const GuessesInStorage = localStorage.getItem("songSyncGuesses");
+      if (GuessesInStorage){
+      setGuessList(JSON.parse(GuessesInStorage))
+      }
     }
   }
 
@@ -45,6 +54,10 @@ function App() {
     const dateInStorage = localStorage.getItem("game-date");
     const statusInStorage = localStorage.getItem("status");
     const GuessIndexInStorage = Number(localStorage.getItem("guess-index"));
+    const GuessesInStorage = localStorage.getItem("songSyncGuesses");
+    if (GuessesInStorage){
+      setGuessList(JSON.parse(GuessesInStorage));
+    }
     if (todayDateString === dateInStorage){
       if (statusInStorage === "playing"){
         setGuessIndex(GuessIndexInStorage);
@@ -60,6 +73,8 @@ function App() {
       localStorage.setItem("status", "playing");
       localStorage.setItem("game-date", todayDateString);
       localStorage.setItem("guess-index", '0');
+      const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5" };
+      localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
     }
   }
 
