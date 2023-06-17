@@ -4,6 +4,7 @@ import PreviousGuesses from "../PreviousGuesses";
 import Header from '../Header';
 import LyricsDisplay from '../LyricsDisplay';
 import Result from '../Result';
+import ScoreHistory from '../ScoreHistory.tsx';
 
 function App() {
   const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
@@ -119,6 +120,7 @@ return (
           correctAnswerGiven || !correctAnswerGiven && guessIndex === 5 ? 
           <Result correctAnswerGiven={correctAnswerGiven} song={song.song} artist={song.artist}/> : null
         }
+      <ScoreHistory/>
     </div>
   )
 }
