@@ -79,7 +79,8 @@ function App() {
   }
 
   const getSong = async () => {
-    const res = await fetch(`http://localhost:3001/todayssong`);
+    // const res = await fetch(`http://localhost:3001/todayssong`);
+    const res = await fetch(`https://song-sync-server.onrender.com/todayssong`);
     const data = await res.json();
     const songInfo = data.payload;
     setAnswer(songInfo[0].name);
