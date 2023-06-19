@@ -15,12 +15,12 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
         if (guessIndex < 5){
             if (guessIndex === 0){
                 const today = new Date;
-                const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+                const todayDateString = `${20}-${today.getMonth()}-${today.getFullYear()}`;
                 const playerHistory = JSON.parse(localStorage.getItem('playerHistory')!);
                 const playerHistoryLastPlayed = new Date (playerHistory.lastUpdated);
                 const playerHistoryLastPlayedString = `${playerHistoryLastPlayed.getDate()}-${playerHistoryLastPlayed.getMonth()}-${playerHistoryLastPlayed.getFullYear()}`;
                 if (playerHistoryLastPlayedString !== todayDateString){
-                    const newHistory = {...playerHistory, lastUpdated: today};
+                    const newHistory = {...playerHistory, attempts: playerHistory.attempts + 1, lastUpdated: today};
                     localStorage.setItem('playerHistory', JSON.stringify(newHistory));
                 }
                 if(guess === ''){
@@ -63,6 +63,14 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
         if (guess.toLowerCase() === answer.toLowerCase()){
             setCorrectAnswerGiven(true);
             localStorage.setItem('status', 'passed');
+            const playerHistory = JSON.parse(localStorage.getItem('playerHistory')!);
+            if (playerHistory.currentStreak === playerHistory.bestStreak) {
+                const newHistory = {...playerHistory, completed: playerHistory.completed + 1, currentStreak: playerHistory.currentStreak + 1, bestStreak: playerHistory.bestStreak + 1};
+                localStorage.setItem('playerHistory', JSON.stringify(newHistory));
+            } else {
+                const newHistory = {...playerHistory, completed: playerHistory.completed + 1, currentStreak: playerHistory.currentStreak + 1};
+                localStorage.setItem('playerHistory', JSON.stringify(newHistory));
+            }
             setProgress('passed');
         } else {
             if (guessIndex === 4){

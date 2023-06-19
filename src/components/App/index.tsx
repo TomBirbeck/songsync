@@ -29,6 +29,8 @@ function App() {
   // localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
   // const playerHistoryfake = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date};
   // localStorage.setItem ('playerHistory', JSON.stringify(playerHistoryfake));
+  // console.log( JSON.parse(localStorage.getItem('playerHistory')!));
+
 
   const updateProgress = (progress: any) => {
     const today = new Date;
