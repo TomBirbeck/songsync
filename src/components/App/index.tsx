@@ -21,6 +21,7 @@ function App() {
   const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
   const [gameInfoToggle, setGameInfoToggle] = useState(false);
   const [scoreHistoryToggle, setScoreHistoryToggle] = useState(false);
+  // const [playerHistory, setPlayerHistory] = useState({attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0})
 
   // localStorage.setItem('status', 'playing');
   // localStorage.setItem('guess-index', '0');
