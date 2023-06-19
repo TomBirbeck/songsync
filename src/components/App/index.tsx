@@ -27,7 +27,7 @@ function App() {
   // localStorage.setItem('guess-index', '0');
   // const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5" };
   // localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
-  // const playerHistoryfake = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0};
+  // const playerHistoryfake = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date};
   // localStorage.setItem ('playerHistory', JSON.stringify(playerHistoryfake));
 
   const updateProgress = (progress: any) => {
@@ -103,7 +103,7 @@ useEffect(() => {
 },[guessIndex, progress]);
 
 return (
-    <div className="min-h-screen h-full w-full bg-gray-950 flex flex-col items-center p-2 gap-4">
+  <div className="min-h-screen h-full w-full bg-gray-950 flex flex-col items-center p-2 gap-4">
       <NavBar
       scoreHistoryToggle={scoreHistoryToggle}
       setScoreHistoryToggle={setScoreHistoryToggle}
@@ -111,6 +111,7 @@ return (
       setGameInfoToggle={setGameInfoToggle}
       setPlayerHistory={setPlayerHistory}
       />
+      {scoreHistoryToggle && <ScoreHistory attempts={playerHistory.attempts} completions={playerHistory.completions} currentStreak={playerHistory.currentStreak} bestStreak={playerHistory.bestStreak}/>}
      {song.lyrics.length > 1 &&
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
      }
@@ -130,7 +131,6 @@ return (
           correctAnswerGiven || !correctAnswerGiven && guessIndex === 5 ? 
           <Result correctAnswerGiven={correctAnswerGiven} song={song.song} artist={song.artist}/> : null
         }
-    {scoreHistoryToggle && <ScoreHistory attempts={playerHistory.attempts} completions={playerHistory.completions} currentStreak={playerHistory.currentStreak} bestStreak={playerHistory.bestStreak}/>}
     </div>
   )
 }

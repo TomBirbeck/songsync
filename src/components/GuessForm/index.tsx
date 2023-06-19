@@ -14,6 +14,15 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
         e.preventDefault();
         if (guessIndex < 5){
             if (guessIndex === 0){
+                const today = new Date;
+                const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+                const playerHistory = JSON.parse(localStorage.getItem('playerHistory')!);
+                const playerHistoryLastPlayed = new Date (playerHistory.lastUpdated);
+                const playerHistoryLastPlayedString = `${playerHistoryLastPlayed.getDate()}-${playerHistoryLastPlayed.getMonth()}-${playerHistoryLastPlayed.getFullYear()}`;
+                if (playerHistoryLastPlayedString !== todayDateString){
+                    const newHistory = {...playerHistory, lastUpdated: today};
+                    localStorage.setItem('playerHistory', JSON.stringify(newHistory));
+                }
                 if(guess === ''){
                     setGuessList({...guessList, guess1: 'Passed'});
                 } else {

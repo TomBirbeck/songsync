@@ -1,6 +1,5 @@
 import {HiOutlineInformationCircle, HiPresentationChartLine} from 'react-icons/hi';
 import Header from '../Header';
-import {useState} from 'react';
 import { NavIProps } from '../types';
 
 const NavBar = ({scoreHistoryToggle, setScoreHistoryToggle, gameInfoToggle, setGameInfoToggle, setPlayerHistory}: NavIProps) => {
