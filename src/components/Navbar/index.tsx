@@ -1,20 +1,20 @@
 import {HiOutlineInformationCircle, HiPresentationChartLine} from 'react-icons/hi';
 import Header from '../Header';
+import {useState} from 'react';
+import { NavIProps } from '../types';
 
-type NavIProps = {
-    scoreHistoryToggle: boolean;
-    setScoreHistoryToggle: React.Dispatch<React.SetStateAction<boolean>>;
-    gameInfoToggle: boolean;
-    setGameInfoToggle: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const NavBar = ({scoreHistoryToggle, setScoreHistoryToggle, gameInfoToggle, setGameInfoToggle, setPlayerHistory}: NavIProps) => {
 
-const NavBar = ({scoreHistoryToggle, setScoreHistoryToggle, gameInfoToggle, setGameInfoToggle}: NavIProps) => {
+    const getPlayerHistory = () => {
+        setPlayerHistory(JSON.parse(localStorage.getItem('playerHistory')!));
+      }
 
     const handleScoreHistoryToggle = () => {
         if(gameInfoToggle){
             setGameInfoToggle(false);
         }
         setScoreHistoryToggle(!scoreHistoryToggle);
+        getPlayerHistory();
     }
     const handleGameInfoToggle = () => {
         if(scoreHistoryToggle){

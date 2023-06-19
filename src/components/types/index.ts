@@ -51,3 +51,11 @@ export type PreviousGuessItemIprops = {
     answer: string;
     guessNumber: number;
     }
+
+export type NavIProps = {
+        scoreHistoryToggle: boolean;
+        setScoreHistoryToggle: React.Dispatch<React.SetStateAction<boolean>>;
+        gameInfoToggle: boolean;
+        setGameInfoToggle: React.Dispatch<React.SetStateAction<boolean>>;
+        setPlayerHistory: React.Dispatch<React.SetStateAction<{}>>;
+    }
