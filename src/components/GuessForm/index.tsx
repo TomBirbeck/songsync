@@ -65,10 +65,10 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
             localStorage.setItem('status', 'passed');
             const playerHistory = JSON.parse(localStorage.getItem('playerHistory')!);
             if (playerHistory.currentStreak === playerHistory.bestStreak) {
-                const newHistory = {...playerHistory, completed: playerHistory.completed + 1, currentStreak: playerHistory.currentStreak + 1, bestStreak: playerHistory.bestStreak + 1};
+                const newHistory = {...playerHistory, completions: playerHistory.completions + 1, currentStreak: playerHistory.currentStreak + 1, bestStreak: playerHistory.bestStreak + 1};
                 localStorage.setItem('playerHistory', JSON.stringify(newHistory));
             } else {
-                const newHistory = {...playerHistory, completed: playerHistory.completed + 1, currentStreak: playerHistory.currentStreak + 1};
+                const newHistory = {...playerHistory, completions: playerHistory.completions + 1, currentStreak: playerHistory.currentStreak + 1};
                 localStorage.setItem('playerHistory', JSON.stringify(newHistory));
             }
             setProgress('passed');
@@ -92,7 +92,7 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
             onChange={handleGuess}>   
             </input>
             <div className="w-full flex justify-center gap-3">
-            <button className="bg-green-400 w-2/5 rounded-md md:w-1/5 text-xl hover:bg-purple-400">Check</button>
+            <button className="bg-purple-400 w-2/5 rounded-md md:w-1/5 text-xl hover:bg-green-400">Check</button>
             <Button name={'Skip >>'}/> 
             </div>
         </form>
