@@ -5,6 +5,7 @@ import LyricsDisplay from '../LyricsDisplay';
 import Result from '../Result';
 import ScoreHistory from '../ScoreHistory.tsx';
 import NavBar from '../Navbar/index.tsx';
+import Instructions from '../Instructions/index.tsx';
 
 function App() {
   const [correctAnswerGiven, setCorrectAnswerGiven] = useState(false);
@@ -114,6 +115,7 @@ return (
       setPlayerHistory={setPlayerHistory}
       />
       {scoreHistoryToggle && <ScoreHistory attempts={playerHistory.attempts} completions={playerHistory.completions} currentStreak={playerHistory.currentStreak} bestStreak={playerHistory.bestStreak}/>}
+      {gameInfoToggle && <Instructions/>}
      {song.lyrics.length > 1 &&
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
      }
