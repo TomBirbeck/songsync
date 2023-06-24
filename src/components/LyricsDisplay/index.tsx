@@ -12,6 +12,10 @@ const LyricsDisplay = ({lyrics, guessIndex}: lyricsProps) => {
     }, [guessIndex])
     return (
         <div className="min-h-[16rem] w-10/12 md:w-1/2 mb-4 flex flex-col gap-2">
+  {!display && <div
+  className="inline-block self-center h-16 w-16 animate-spin rounded-full border-4 border-solid border-purple-400 border-r-transparent"
+  role="status">
+</div>}
             {display.map((lyric, index) => { 
                 return (
                     <div className='bg-slate-800 rounded-lg text-center' key={index}>
