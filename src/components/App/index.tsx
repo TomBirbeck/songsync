@@ -106,7 +106,7 @@ useEffect(() => {
 },[guessIndex, progress]);
 
 return (
-  <div className="min-h-screen h-full w-full bg-gray-950 flex flex-col items-center p-2 gap-4">
+  <div className="h-screen bg-gray-950 flex flex-col items-center p-2 gap-4">
       <NavBar
       scoreHistoryToggle={scoreHistoryToggle}
       setScoreHistoryToggle={setScoreHistoryToggle}

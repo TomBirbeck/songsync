@@ -24,11 +24,11 @@ const NavBar = ({scoreHistoryToggle, setScoreHistoryToggle, gameInfoToggle, setG
 
     return (
         <nav className='w-full flex text-purple-400 text-5xl justify-around md:justify-center md:gap-44'>
-           <button onClick={handleScoreHistoryToggle}>
+           <button onClick={handleScoreHistoryToggle} className='hover:text-white lg:hover:scale-150'>
                 <HiPresentationChartLine/>
             </button>
            <Header/>
-           <button onClick={handleGameInfoToggle}>
+           <button onClick={handleGameInfoToggle} className='hover:text-white lg:hover:scale-150'>
             <HiOutlineInformationCircle/>
            </button>
         </nav>
