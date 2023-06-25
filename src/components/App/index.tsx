@@ -23,6 +23,7 @@ function App() {
   const [gameInfoToggle, setGameInfoToggle] = useState(false);
   const [scoreHistoryToggle, setScoreHistoryToggle] = useState(false);
   const [playerHistory, setPlayerHistory] = useState(JSON.parse(localStorage.getItem('playerHistory')!));
+  const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
 
   // localStorage.setItem('status', 'playing');
   // localStorage.setItem('guess-index', '0');
@@ -87,13 +88,22 @@ function App() {
   }
 
   const getSong = async () => {
-    // const res = await fetch(`http://localhost:3001/todayssong`);
     const res = await fetch(`https://song-sync-server.onrender.com/todayssong`);
     const data = await res.json();
     const songInfo = data.payload;
     setAnswer(songInfo[0].name);
     setSong({song: songInfo[0].name, artist: songInfo[0].artist, lyrics: songInfo[0].lyrics});
 }
+
+useEffect(()=>{
+  const handleResizeWindow = () => setWindowSize(window.innerWidth);
+  // subscribe to window resize event "onComponentDidMount"
+  window.addEventListener("resize", handleResizeWindow);
+  return () => {
+    // unsubscribe "onComponentDestroy"
+    window.removeEventListener("resize", handleResizeWindow);
+  };
+},[])
 
 useEffect(() => {
     getSong();
@@ -106,7 +116,7 @@ useEffect(() => {
 },[guessIndex, progress]);
 
 return (
-  <div className="h-screen bg-gray-950 flex flex-col items-center p-2 gap-4">
+  <div className="min-h-screen bg-gray-950 flex flex-col items-center p-2 gap-4 box-border">
       <NavBar
       scoreHistoryToggle={scoreHistoryToggle}
       setScoreHistoryToggle={setScoreHistoryToggle}
@@ -114,10 +124,14 @@ return (
       setGameInfoToggle={setGameInfoToggle}
       setPlayerHistory={setPlayerHistory}
       />
-      {scoreHistoryToggle && <ScoreHistory attempts={playerHistory.attempts} completions={playerHistory.completions} currentStreak={playerHistory.currentStreak} bestStreak={playerHistory.bestStreak}/>}
+      {scoreHistoryToggle && <ScoreHistory attempts={playerHistory.attempts} completions={playerHistory.completions} currentStreak={playerHistory.currentStreak} bestStreak={playerHistory.bestStreak} setScoreHistoryToggle={setScoreHistoryToggle} windowSize={windowSize}/>}
       {gameInfoToggle && <Instructions/>}
-     {song.lyrics.length > 1 &&
-     <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/>
+     {song.lyrics.length > 1 ?
+     <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/> : 
+     <div
+      className="inline-block self-center h-16 w-16 animate-spin rounded-full border-4 border-solid border-purple-400 border-r-transparent"
+      role="status">
+    </div>
      }
      <PreviousGuesses guesses={guessList} answer={answer}/>
      {!correctAnswerGiven && guessIndex < 5 ?
