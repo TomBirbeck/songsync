@@ -125,7 +125,7 @@ return (
       setPlayerHistory={setPlayerHistory}
       />
       {scoreHistoryToggle && <ScoreHistory attempts={playerHistory.attempts} completions={playerHistory.completions} currentStreak={playerHistory.currentStreak} bestStreak={playerHistory.bestStreak} setScoreHistoryToggle={setScoreHistoryToggle} windowSize={windowSize}/>}
-      {gameInfoToggle && <Instructions/>}
+      {gameInfoToggle && <Instructions setGameInfoToggle={setGameInfoToggle} windowSize={windowSize}/>}
      {song.lyrics.length > 1 ?
      <LyricsDisplay lyrics={song.lyrics} guessIndex={guessIndex}/> : 
      <div

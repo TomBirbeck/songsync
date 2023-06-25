@@ -86,13 +86,13 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
     return (
         <form className="w-full flex flex-col justify-center items-center gap-4" onSubmit={handleSubmit}>
             <input
-            className="bg-purple-200 p-2 rounded-md w-10/12 md:w-1/2"
+            className="bg-purple-200 p-2 rounded-md w-10/12 md:w-3/4 lg:w-1/2"
             placeholder="Enter a guess"
             value={guess}
             onChange={handleGuess}>   
             </input>
             <div className="w-full flex justify-center gap-3">
-            <button className="bg-purple-400 w-2/5 rounded-md md:w-1/5 text-xl hover:bg-green-400">Check</button>
+            <button className="bg-purple-400 w-2/5 rounded-md md:w-1/3 lg:w-1/5 text-xl hover:bg-green-400">Check</button>
             <Button name={'Skip >>'}/> 
             </div>
         </form>
