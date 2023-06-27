@@ -22,7 +22,7 @@ function App() {
   const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
   const [gameInfoToggle, setGameInfoToggle] = useState(false);
   const [scoreHistoryToggle, setScoreHistoryToggle] = useState(false);
-  const [playerHistory, setPlayerHistory] = useState(JSON.parse(localStorage.getItem('playerHistory')!));
+  const [playerHistory, setPlayerHistory] = useState(JSON.parse(localStorage.getItem('playerHistory')!) || {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date});
   const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
 
   // localStorage.setItem('status', 'playing');
@@ -32,6 +32,14 @@ function App() {
   // const playerHistoryfake = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date};
   // localStorage.setItem ('playerHistory', JSON.stringify(playerHistoryfake));
   // console.log( JSON.parse(localStorage.getItem('playerHistory')!));
+
+  const checkForPlayer = () => {
+    const player = localStorage.getItem('playerHistory');
+    if (!player){
+      const newPlayerHistory = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date};
+      localStorage.setItem('playerHistory', JSON.stringify(newPlayerHistory));
+    } 
+  }
 
 
   const updateProgress = (progress: any) => {
@@ -106,6 +114,7 @@ useEffect(()=>{
 },[])
 
 useEffect(() => {
+    checkForPlayer();
     getSong();
     checkDate();
     checkForProgress();
