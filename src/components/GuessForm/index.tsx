@@ -60,7 +60,7 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
     }
 
     const handleCheck = (guess: string, answer: string) => {
-        if (guess.toLowerCase() === answer.toLowerCase()){
+        if (guess.toLowerCase().trim() === answer.toLowerCase()){
             setCorrectAnswerGiven(true);
             localStorage.setItem('status', 'passed');
             const playerHistory = JSON.parse(localStorage.getItem('playerHistory')!);
