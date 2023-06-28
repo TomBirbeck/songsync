@@ -96,7 +96,8 @@ function App() {
   }
 
   const getSong = async () => {
-    const res = await fetch(`https://song-sync-server.onrender.com/todayssong`);
+    const url = import.meta.env.VITE_API_URL
+    const res = await fetch(`${url}`);
     const data = await res.json();
     const songInfo = data.payload;
     setAnswer(songInfo[0].name);
