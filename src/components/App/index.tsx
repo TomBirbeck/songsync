@@ -33,6 +33,23 @@ function App() {
   // localStorage.setItem ('playerHistory', JSON.stringify(playerHistoryfake));
   // console.log( JSON.parse(localStorage.getItem('playerHistory')!));
 
+  const checkForSong = () => {
+    const songAlreadyExists = localStorage.getItem('todaysSong');
+    const today = new Date;
+    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+    if (!songAlreadyExists){
+      getSong();
+    } else if (songAlreadyExists) {
+      const songToday = JSON.parse(songAlreadyExists);
+      if (songToday.date === todayDateString) {
+        setSong({song: songToday.song, artist: songToday.artist, lyrics: songToday.lyrics});
+        setAnswer(songToday.song);
+      } else {
+        getSong();
+      }
+    }
+  }
+
   const checkForPlayer = () => {
     const player = localStorage.getItem('playerHistory');
     if (!player){
@@ -98,10 +115,15 @@ function App() {
   const getSong = async () => {
     const url = import.meta.env.VITE_API_URL
     const res = await fetch(`${url}`);
+    // const res = await fetch('http://localhost:3001/todayssong')
     const data = await res.json();
     const songInfo = data.payload;
     setAnswer(songInfo[0].name);
     setSong({song: songInfo[0].name, artist: songInfo[0].artist, lyrics: songInfo[0].lyrics});
+    const today = new Date;
+    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+    const songUpdate = {song: songInfo[0].name, artist: songInfo[0].artist, lyrics: songInfo[0].lyrics, date:todayDateString};
+    localStorage.setItem('todaysSong', JSON.stringify(songUpdate));
 }
 
 useEffect(()=>{
@@ -116,7 +138,7 @@ useEffect(()=>{
 
 useEffect(() => {
     checkForPlayer();
-    getSong();
+    checkForSong();
     checkDate();
     checkForProgress();
   },[]);
