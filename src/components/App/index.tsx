@@ -16,7 +16,8 @@ function App() {
     guess2: 'Guess 2',
     guess3: 'Guess 3',
     guess4: 'Guess 4',
-    guess5: 'Guess 5'},
+    guess5: 'Guess 5',
+    guess6: 'Guess 6',}
   );
   const [guessIndex, setGuessIndex] = useState<number>(Number(localStorage.getItem('guess-index')) || 0);
   const [progress, setProgress] = useState(localStorage.getItem('status') || 'playing');
@@ -25,30 +26,31 @@ function App() {
   const [playerHistory, setPlayerHistory] = useState(JSON.parse(localStorage.getItem('playerHistory')!) || {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date});
   const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
 
-  // localStorage.setItem('status', 'playing');
-  // localStorage.setItem('guess-index', '0');
-  // const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5" };
-  // localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
+  localStorage.setItem('status', 'playing');
+  localStorage.setItem('guess-index', '0');
+  const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5", guess6: "Guess 6" };
+  localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
   // const playerHistoryfake = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date};
   // localStorage.setItem ('playerHistory', JSON.stringify(playerHistoryfake));
   // console.log( JSON.parse(localStorage.getItem('playerHistory')!));
 
   const checkForSong = () => {
-    const songAlreadyExists = localStorage.getItem('todaysSong');
-    const today = new Date;
-    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
-    if (!songAlreadyExists){
-      getSong();
-    } else if (songAlreadyExists) {
-      const songToday = JSON.parse(songAlreadyExists);
-      if (songToday.date === todayDateString) {
-        setSong({song: songToday.song, artist: songToday.artist, lyrics: songToday.lyrics});
-        setAnswer(songToday.song);
-      } else {
+    // const songAlreadyExists = localStorage.getItem('todaysSong');
+    // const today = new Date;
+    // const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+    // if (!songAlreadyExists){
+    //   getSong();
+    // } else if (songAlreadyExists) {
+    //   const songToday = JSON.parse(songAlreadyExists);
+    //   if (songToday.date === todayDateString) {
+    //     setSong({song: songToday.song, artist: songToday.artist, lyrics: songToday.lyrics});
+    //     setAnswer(songToday.song);
+    //     console.log('local')
+    //   } else {
         getSong();
       }
-    }
-  }
+    // }
+  // }
 
   const checkForPlayer = () => {
     const player = localStorage.getItem('playerHistory');
@@ -62,7 +64,7 @@ function App() {
   const updateProgress = (progress: any) => {
     const today = new Date;
     const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
-    const songSync = {guess1: guessList.guess1, guess2: guessList.guess2, guess3: guessList.guess3, guess4: guessList.guess4, guess5: guessList.guess5 };
+    const songSync = {guess1: guessList.guess1, guess2: guessList.guess2, guess3: guessList.guess3, guess4: guessList.guess4, guess5: guessList.guess5, guess6: guessList.guess6 };
     localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
     localStorage.setItem("status", progress);
     localStorage.setItem("game-date", todayDateString);
@@ -78,6 +80,7 @@ function App() {
       const GuessesInStorage = localStorage.getItem("songSyncGuesses");
       if (GuessesInStorage){
       setGuessList(JSON.parse(GuessesInStorage))
+      console.log(JSON.parse(GuessesInStorage))
       }
     }
   }
@@ -107,7 +110,7 @@ function App() {
       localStorage.setItem("status", "playing");
       localStorage.setItem("game-date", todayDateString);
       localStorage.setItem("guess-index", '0');
-      const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5" };
+      const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5", guess6: "Guess 6" };
       localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
     }
   }
@@ -166,7 +169,7 @@ return (
     </div>
      }
      <PreviousGuesses guesses={guessList} answer={answer}/>
-     {!correctAnswerGiven && guessIndex < 5 ?
+     {!correctAnswerGiven && guessIndex < 6 ?
      <GuessForm
      guessList={guessList}
      setGuessList={setGuessList}
@@ -178,7 +181,7 @@ return (
      /> : null
     }
         {
-          correctAnswerGiven || !correctAnswerGiven && guessIndex === 5 ? 
+          correctAnswerGiven || !correctAnswerGiven && guessIndex === 6 ? 
           <Result correctAnswerGiven={correctAnswerGiven} song={song.song} artist={song.artist}/> : null
         }
     </div>

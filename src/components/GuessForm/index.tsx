@@ -12,7 +12,7 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
     
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (guessIndex < 5){
+        if (guessIndex < 6){
             if (guessIndex === 0){
                 const today = new Date;
                 const todayDateString = `${20}-${today.getMonth()}-${today.getFullYear()}`;
@@ -52,6 +52,12 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
                 } else {
                     setGuessList({...guessList, guess5 : guess});
                 }
+            }  else if (guessIndex === 5){
+                    if(guess === ''){
+                        setGuessList({...guessList, guess6: 'Passed'});
+                    } else {
+                        setGuessList({...guessList, guess6 : guess});
+                    }
             }
             setGuessIndex(guessIndex+=1);
             setGuess('');
@@ -73,7 +79,7 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
             }
             setProgress('passed');
         } else {
-            if (guessIndex === 4){
+            if (guessIndex === 5){
                 localStorage.setItem('status', 'failed');
                 setProgress('failed');
                 setCorrectAnswerGiven(false);

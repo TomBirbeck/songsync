@@ -5,6 +5,7 @@ export type GuessIProps = {
         guess3: string;
         guess4: string;
         guess5: string;
+        guess6: string;
     };
     answer: string;
 }
@@ -16,6 +17,7 @@ export type FormIProps = {
         guess3: string;
         guess4: string;
         guess5: string;
+        guess6: string;
     };
     setGuessList: React.Dispatch<React.SetStateAction<{
         guess1: string;
@@ -23,6 +25,7 @@ export type FormIProps = {
         guess3: string;
         guess4: string;
         guess5: string;
+        guess6: string;
     }>>;
     answer: string;
     guessIndex: number;
