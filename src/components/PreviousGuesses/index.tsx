@@ -2,7 +2,6 @@ import PreviousGuessItem from "../PreviousGuessItem"
 import { GuessIProps } from "../types"
 
 const PreviousGuesses = ({guesses, answer}: GuessIProps) => {
-    console.log({guesses})
     return (
         <div className="bg-purple-200 w-10/12 md:w-3/4 lg:w-1/2 py-1 rounded-lg text-xl font-semibold">
         <PreviousGuessItem guess={guesses.guess1} guessNumber={1} answer={answer}/>

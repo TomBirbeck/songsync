@@ -26,31 +26,30 @@ function App() {
   const [playerHistory, setPlayerHistory] = useState(JSON.parse(localStorage.getItem('playerHistory')!) || {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date});
   const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
 
-  localStorage.setItem('status', 'playing');
-  localStorage.setItem('guess-index', '0');
-  const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5", guess6: "Guess 6" };
-  localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
+  // localStorage.setItem('status', 'playing');
+  // localStorage.setItem('guess-index', '0');
+  // const songSync = {guess1: 'Guess 1', guess2: "Guess 2", guess3: "Guess 3", guess4: "Guess 4", guess5: "Guess 5", guess6: "Guess 6" };
+  // localStorage.setItem('songSyncGuesses', JSON.stringify(songSync));
   // const playerHistoryfake = {attempts: 0, completions: 0, currentStreak: 0, bestStreak: 0, lastUpdated: new Date};
   // localStorage.setItem ('playerHistory', JSON.stringify(playerHistoryfake));
   // console.log( JSON.parse(localStorage.getItem('playerHistory')!));
 
   const checkForSong = () => {
-    // const songAlreadyExists = localStorage.getItem('todaysSong');
-    // const today = new Date;
-    // const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
-    // if (!songAlreadyExists){
-    //   getSong();
-    // } else if (songAlreadyExists) {
-    //   const songToday = JSON.parse(songAlreadyExists);
-    //   if (songToday.date === todayDateString) {
-    //     setSong({song: songToday.song, artist: songToday.artist, lyrics: songToday.lyrics});
-    //     setAnswer(songToday.song);
-    //     console.log('local')
-    //   } else {
+    const songAlreadyExists = localStorage.getItem('todaysSong');
+    const today = new Date;
+    const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
+    if (!songAlreadyExists){
+      getSong();
+    } else if (songAlreadyExists) {
+      const songToday = JSON.parse(songAlreadyExists);
+      if (songToday.date === todayDateString) {
+        setSong({song: songToday.song, artist: songToday.artist, lyrics: songToday.lyrics});
+        setAnswer(songToday.song);
+      } else {
         getSong();
       }
-    // }
-  // }
+    }
+  }
 
   const checkForPlayer = () => {
     const player = localStorage.getItem('playerHistory');
@@ -79,8 +78,7 @@ function App() {
       setProgress(status);
       const GuessesInStorage = localStorage.getItem("songSyncGuesses");
       if (GuessesInStorage){
-      setGuessList(JSON.parse(GuessesInStorage))
-      console.log(JSON.parse(GuessesInStorage))
+      setGuessList(JSON.parse(GuessesInStorage));
       }
     }
   }
