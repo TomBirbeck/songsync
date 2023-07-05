@@ -115,8 +115,13 @@ function App() {
 
   const getSong = async () => {
     const url = import.meta.env.VITE_API_URL
-    const res = await fetch(`${url}`);
-    // const res = await fetch('http://localhost:3001/todayssong')
+    // const res = await fetch(`${url}`);
+    const res = await fetch(`${url}`, {
+      headers: { "authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`},
+    });
+    // const res = await fetch('http://localhost:3001/todayssong', {
+    //   headers: { "authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`},
+    // })
     const data = await res.json();
     const songInfo = data.payload;
     setAnswer(songInfo[0].name);
