@@ -115,7 +115,6 @@ function App() {
 
   const getSong = async () => {
     const url = import.meta.env.VITE_API_URL
-    // const res = await fetch(`${url}`);
     const res = await fetch(`${url}`, {
       headers: { "authorization": `Bearer ${import.meta.env.VITE_API_TOKEN}`},
     });

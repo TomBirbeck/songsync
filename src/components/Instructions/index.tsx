@@ -1,7 +1,4 @@
-type InstructionsIProps = {
-    setGameInfoToggle: React.Dispatch<React.SetStateAction<boolean>>;
-    windowSize: number;
-}
+import { InstructionsIProps } from "../types"
 
 const Instructions = ({setGameInfoToggle, windowSize}: InstructionsIProps) => {
         if (windowSize > 820){

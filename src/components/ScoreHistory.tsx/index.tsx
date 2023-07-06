@@ -1,13 +1,4 @@
-import CountDownTimer from "../CountDownTimer";
-
-type ScoreHistoryIprops = {
-    attempts: number;
-    completions: number;
-    currentStreak: number;
-    bestStreak: number;
-    setScoreHistoryToggle: React.Dispatch<React.SetStateAction<boolean>>;
-    windowSize: number;
-}
+import { ScoreHistoryIprops } from "../types";
 
 const ScoreHistory = ({attempts, completions, currentStreak, bestStreak, setScoreHistoryToggle, windowSize} : ScoreHistoryIprops) => {
 
@@ -24,7 +15,6 @@ const ScoreHistory = ({attempts, completions, currentStreak, bestStreak, setScor
                 <p>Current streak: <span>{currentStreak}</span></p>
                 <p>Best Streak: <span>{bestStreak}</span></p>
                 </div>
-            <CountDownTimer/>
             </div>
             </div>
         );
@@ -38,7 +28,6 @@ const ScoreHistory = ({attempts, completions, currentStreak, bestStreak, setScor
                                 <p>Current streak: <span>{currentStreak}</span></p>
                                 <p>Best Streak: <span>{bestStreak}</span></p>
                                 </div>
-                                <CountDownTimer/>
                         </div>
                         )
                     }
