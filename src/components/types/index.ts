@@ -62,3 +62,17 @@ export type NavIProps = {
         setGameInfoToggle: React.Dispatch<React.SetStateAction<boolean>>;
         setPlayerHistory: React.Dispatch<React.SetStateAction<{}>>;
     }
+
+export type ScoreHistoryIprops = {
+    attempts: number;
+    completions: number;
+    currentStreak: number;
+    bestStreak: number;
+    setScoreHistoryToggle: React.Dispatch<React.SetStateAction<boolean>>;
+    windowSize: number;
+}
+
+export type InstructionsIProps = {
+    setGameInfoToggle: React.Dispatch<React.SetStateAction<boolean>>;
+    windowSize: number;
+}
