@@ -4,7 +4,6 @@ import { lyricsProps } from '../types';
 const LyricsDisplay = ({lyrics, guessIndex}: lyricsProps) => {
     const [display, setDisplay] = useState<string[]>(['']);
     const splitLyrics = lyrics.split(',');
-    console.log(splitLyrics);
     const lyricLength = (index: number) => {
         return splitLyrics.slice(0, index + 1)
     }
