@@ -18,7 +18,7 @@ const CountDownTimer = () => {
     
     return (
         <div className='lg:w-3/4 text-center bg-purple-300 rounded-lg p-4 self-center'>
-           <p>Time until next SongSmith: <span>{timer![0]}h {timer![1]}m {timer![2]}s</span></p> 
+           <p>Time until next Songsmith: <span>{timer![0]}h {timer![1]}m {timer![2]}s</span></p> 
         </div>
     )
 }

@@ -59,7 +59,6 @@ function App() {
     } 
   }
 
-
   const updateProgress = (progress: any) => {
     const today = new Date;
     const todayDateString = `${today.getDate()}-${today.getMonth()}-${today.getFullYear()}`;
