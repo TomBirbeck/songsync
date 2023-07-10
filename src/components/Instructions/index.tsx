@@ -28,7 +28,7 @@ const Instructions = ({setGameInfoToggle, windowSize}: InstructionsIProps) => {
             <h3 className="underline text-4xl">How to play</h3>
             <ul className="flex flex-col gap-4">
                 <li>Read through the lyrics displayed</li>
-                <li>Enter a guess in the box provided</li>
+                <li>Enter a guess for the song title in the box provided</li>
                 <li>Press 'Skip' if you do not want to guess at this point</li>
                 <li>Press 'Check' to submit your guess</li>
                 <li>If your answer is incorrect, more lyrics will appear</li>
