@@ -93,7 +93,7 @@ const GuessForm = ({guessList, setGuessList, answer, guessIndex, setGuessIndex, 
         <form className="w-full flex flex-col justify-center items-center gap-4" onSubmit={handleSubmit}>
             <input
             className="bg-purple-200 p-2 rounded-md w-10/12 md:w-3/4 lg:w-1/2"
-            placeholder="Enter a guess"
+            placeholder="Enter a song title"
             value={guess}
             onChange={handleGuess}>   
             </input>
